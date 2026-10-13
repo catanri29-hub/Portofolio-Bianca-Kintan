@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Portofolio - Bianca Kintan Prameswari</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Define a color palette using CSS variables for easy changes */
+        :root {
+            /* Warna Akses Baru (Biru Kalem) */
+            --primary-blue: #4fc3f7; /* Soft Sky Blue / Light Blue */
+            --secondary-gold: #ffc107; /* Gold / Amber */
+
+            /* Warna Latar Belakang Baru (Sangat Terang) */
+            --dark-background: #263238; /* Darker Blue-Gray for sidebar */
+            --light-background: #f0f4f7; /* Biru Abu-abu Sangat Terang untuk body/main background */
+
+            /* Warna Teks */
+            --text-dark: #37474f; 
+            --text-light: #cfd8dc; 
+            --border-light: #cfd8dc; 
+        }
+
+        /* General Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-background); 
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation: Menggunakan FIXED position untuk tampilan desktop */
+        .sidebar {
+            width: 250px;
+            background-color: var(--dark-background); 
+            color: #fff;
+            padding: 20px;
+            position: fixed; /* Penting agar sidebar tetap di tempat */
+            height: 100%;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
+            z-index: 1030; /* Agar di atas konten lain */
+        }
+        
+        .banner-logo h2 {
+            /* Gaya Logo */
+            color: var(--secondary-gold) !important;
+        }
+
+
+        .profile-photo img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--primary-blue); 
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .typed-text-output {
+            display: block;
+            height: 20px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-light); 
+            margin-bottom: 20px;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin: 8px 0;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 10px 15px;
+            transition: background-color 0.3s, color 0.3s;
+            text-align: left;
+            border-radius: 4px;
+        }
+
+        .nav-menu a i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: var(--text-light); 
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background-color: rgba(79, 195, 247, 0.2); 
+            color: var(--primary-blue); 
+        }
+        
+        .nav-menu a:hover i {
+            color: var(--primary-blue); 
+        }
+
+        /* Active link style */
+        .nav-menu a.active {
+            background-color: var(--primary-blue);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .nav-menu a.active i {
+            color: #fff;
+        }
+
+        .social-links {
+            margin-top: 25px; 
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .social-links a {
+            color: var(--text-light); 
+            font-size: 1.5rem;
+            margin: 0 8px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-gold); 
+        }
+
+        /* Main Content: Diberi margin kiri sebesar lebar sidebar untuk tampilan desktop */
+        #main-content {
+            margin-left: 250px;
+            padding: 30px;
+            flex-grow: 1;
+            background-color: var(--light-background); 
+        }
+
+        /* Section blocks (Konten Kanan) */
+        .section {
+            background-color: #fff; 
+            padding: 40px 30px; 
+            margin-bottom: 30px;
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+            border: 1px solid var(--border-light); 
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-dark); 
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-blue); 
+            margin-top: 5px;
+            border-radius: 2px;
+        }
+
+        /* Info Grid: Menggunakan layout Bootstrap row/col */
+        .info-grid {
+            padding: 15px 0;
+            border-top: 1px dashed var(--border-light); 
+            color: var(--text-dark);
+        }
+
+        /* Experience & Education Item */
+        .job-item, .edu-item {
+            border-left: 5px solid var(--primary-blue); 
+        }
+
+        .date {
+            color: var(--primary-blue); 
+        }
+
+        /* Skills Item */
+        .skills-category li {
+            background: #e1f5fe; 
+            border-left: 3px solid var(--primary-blue); 
+        }
+
+        /* Footer: Diberi margin kiri sebesar lebar sidebar untuk tampilan desktop */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: var(--dark-background); 
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-left: 250px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Media Queries for Responsiveness (Mobile: kurang dari 992px) */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                width: 100%;
+                position: relative; /* Fixed dinonaktifkan di mobile */
+                height: auto;
+                padding: 20px;
+                text-align: center;
+            }
+
+            #main-content {
+                margin-left: 0; /* Margin kiri dinonaktifkan di mobile */
+                padding: 20px;
+            }
+
+            .sidebar .nav-menu {
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                margin-top: 15px;
+            }
+
+            .nav-menu ul {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .nav-menu li {
+                margin: 5px;
+            }
+
+            .nav-menu a {
+                padding: 8px 10px;
+            }
+            
+            footer {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <header class="sidebar col-lg-3">
+                <div class="banner-logo py-3 mb-3" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <h2 class="h5 text-uppercase fw-bold m-0" style="letter-spacing: 2px;">B.K.P</h2>
+                    <small class="d-block" style="color: var(--text-light);">CV Portfolio</small>
+                </div>
+                
+                <div class="profile-photo">
+                    <img src="assets/img/bianca_profile.png" alt="Foto Profil Bianca Kintan Prameswari"> 
+                </div>
+                
+                <h1>Bianca Kintan Prameswari</h1>
+                <p class="typed-text-output"></p>
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="#about" class="active"><i class="fas fa-user"></i> About</a></li>
+                        <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+                        <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                        <li><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="social-links">
+                    <a href="mailto:catanri29@gmail.com"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:085706291591"><i class="fas fa-phone"></i></a>
+                    <a href="https://instagram.com/bii.kintann" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </header>
+            
+            <main id="main-content" class="col-lg-9 offset-lg-3">
+                
+              <section id="about" class="section">
+    <h2 class="section-title">About Me</h2>
+
+    <div class="about-content">
+        <p>
+            An Information Systems student at Budi Luhur University with an interest
+            in data management, technology, and Artificial Intelligence.
+            Experienced in academic assistance, data entry, and inventory management.
+            Eager to develop technical skills, gain practical experience, and contribute
+            to collaborative projects while continuously learning new technologies.
+        </p>
+
+        <div class="row info-grid">
+            <div class="col-md-6 col-12 mb-2">
+                <strong>Email:</strong>
+                <span>catanri29@gmail.com</span>
+            </div>
+
+            <div class="col-md-6 col-12 mb-2">
+                <strong>University:</strong>
+                <span>Budi Luhur University</span>
+            </div>
+
+            <div class="col-md-6 col-12 mb-2">
+                <strong>Major:</strong>
+                <span>Information Systems</span>
+            </div>
+
+            <div class="col-md-6 col-12 mb-2">
+                <strong>GPA:</strong>
+                <span>3.81</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="experience" class="section">
+    <h2 class="section-title">Experience</h2>
+
+    <div class="job-item p-3 mb-4 rounded shadow-sm">
+        <h3>Teaching Assistant</h3>
+        <p class="company">Budi Luhur University</p>
+        <p class="date">2024 – Present</p>
+
+        <ul>
+            <li>
+                Assisted lecturers in preparing learning materials and managing
+                student assignments.
+            </li>
+            <li>
+                Supported students during academic activities and practical sessions.
+            </li>
+            <li>
+                Developed communication, organization, and time management skills.
+            </li>
+        </ul>
+    </div>
+
+    <div class="job-item p-3 mb-4 rounded shadow-sm">
+        <h3>Data Entry &amp; Inventory Assistant</h3>
+        <p class="company">SMAS Yadika 5 Joglo – Multipurpose Store</p>
+        <p class="date">2021 – 2024</p>
+
+        <h4>Microsoft Access &amp; Excel</h4>
+
+        <ul>
+            <li>
+                Managed inventory records using Microsoft Access.
+            </li>
+            <li>
+                Recorded stock levels and monitored incoming and outgoing goods.
+            </li>
+            <li>
+                Assisted with sales, inventory, and monthly financial records.
+            </li>
+            <li>
+                Used Excel formulas such as SUM, AVERAGE, and COUNT for data
+                calculations.
+            </li>
+            <li>
+                Helped maintain accurate records to support inventory monitoring
+                and daily operations.
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section id="education" class="section">
+    <h2 class="section-title">Education</h2>
+
+    <div class="edu-item p-3 mb-4 rounded shadow-sm">
+        <h3>Bachelor's Degree in Information Systems</h3>
+        <p class="institution">
+            Budi Luhur University, South Jakarta
+        </p>
+        <p class="date">June 2024 – Expected 2028</p>
+        <p>Current GPA: 3.81</p>
+        <p>
+            Relevant coursework: Introduction to Information Systems,
+            Programming Basics, and Data Management.
+        </p>
+    </div>
+
+    <div class="edu-item p-3 mb-4 rounded shadow-sm">
+        <h3>Social Sciences (IPS)</h3>
+        <p class="institution">SMAS Yadika 5, West Jakarta</p>
+        <p class="date">2021 – 2024</p>
+    </div>
+    
+    <div class="col-md-6 col-12 skills-category mb-4">
+    <h3>Technical Skills</h3>
+
+    <ul class="list-unstyled">
+        <li class="p-2 mb-2">
+            Programming: Python (Basic), C (Fundamentals)
+        </li>
+        <li class="p-2 mb-2">
+            Web Development: HTML, CSS, JavaScript (Basic)
+        </li>
+        <li class="p-2 mb-2">
+            Development Tools: Visual Studio Code (VS Code)
+        </li>
+        <li class="p-2 mb-2">
+            UI/UX Design: Figma
+        </li>
+        <li class="p-2 mb-2">
+            Data Management: Microsoft Excel and Microsoft Access
+        </li>
+        <li class="p-2 mb-2">
+            Data Entry and Inventory Management
+        </li>
+    </ul>
+</div>
+</section>
+
+<section id="certifications" class="section">
+    <h2 class="section-title">Programs &amp; Certifications</h2>
+
+    <div class="edu-item p-3 mb-4 rounded shadow-sm">
+        <h3>MonsoonSIM</h3>
+        <p class="institution">Business Simulation</p>
+        <p>
+            Participated in a business simulation experience focused on
+            understanding business processes and decision-making.
+        </p>
+    </div>
+
+
+    <div class="edu-item p-3 mb-4 rounded shadow-sm">
+        <h3>Dicoding Program</h3>
+        <p class="institution">Dicoding Indonesia</p>
+        <p class="date">August 2026</p>
+        <p>
+            Participating in a learning program to develop technical knowledge
+            and programming skills.
+        </p>
+    </div>
+</section>
+
+<section id="skills" class="section">
+    <h2 class="section-title">Skills</h2>
+
+    <div class="row skills-container">
+        <div class="col-md-6 col-12 skills-category mb-4">
+            <h3>Soft Skills</h3>
+
+            <ul class="list-unstyled">
+                <li class="p-2 mb-2">
+                    Teamwork – Collaborating effectively to achieve shared goals.
+                </li>
+                <li class="p-2 mb-2">
+                    Communication – Communicating clearly in academic and team
+                    environments.
+                </li>
+                <li class="p-2 mb-2">
+                    Time Management – Organizing tasks and managing priorities.
+                </li>
+                <li class="p-2 mb-2">
+                    Adaptability – Willing to learn and adjust to new challenges.
+                </li>
+                <li class="p-2 mb-2">
+                    Problem-Solving – Approaching tasks logically and carefully.
+                </li>
+                <li class="p-2 mb-2">
+                    Attention to Detail – Maintaining accuracy when handling data
+                    and completing tasks.
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-6 col-12 skills-category mb-4">
+            <h3>Technical Skills</h3>
+
+            <ul class="list-unstyled">
+                <li class="p-2 mb-2">Data Entry</li>
+                <li class="p-2 mb-2">Microsoft Word &amp; PowerPoint</li>
+                <li class="p-2 mb-2">
+                    Microsoft Excel – SUM, AVERAGE, and COUNT
+                </li>
+                <li class="p-2 mb-2">Microsoft Access – Inventory Management</li>
+                <li class="p-2 mb-2">Programming Basics</li>
+                <li class="p-2 mb-2">Data Management</li>
+                <li class="p-2 mb-2">Interest in Artificial Intelligence &amp; Data</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section">
+    <h2 class="section-title">Contact</h2>
+
+    <p>
+        Feel free to reach out for collaboration, learning opportunities,
+        or professional inquiries.
+    </p>
+
+    <div class="contact-info">
+        <p>
+            <i class="fas fa-envelope"></i>
+            Email:
+            <a href="mailto:catanri29@gmail.com">
+                catanri29@gmail.com
+            </a>
+        </p>
+
+        <p>
+            <i class="fab fa-instagram"></i>
+            Instagram:
+            <a href="https://instagram.com/bii.kintann"
+               target="_blank"
+               rel="noopener noreferrer">
+                @bii.kintann
+            </a>
+        </p>
+    </div>
+</section>
+
+<footer class="mt-4">
+    <p class="m-0">
+        &copy; 2026 Bianca Kintan Prameswari CV. Built with HTML, CSS, and JS.
+    </p>
+</footer>
